@@ -1,0 +1,102 @@
+﻿<Window x:Class="Assignment_1.Mp3Player"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
+        Title="MediaPlayer" 
+        Height="316.05" 
+        Width="387.872"            
+        ResizeMode="NoResize">
+    <Window.CommandBindings>
+        <!-- CommandsBlindings for buttons-->
+        <CommandBinding Command="Stop" CanExecute="Stop_Execute" Executed="Stop_Music" />
+        <CommandBinding Command="Play" CanExecute="Play_Execute" Executed="Play_Music" />
+        <CommandBinding Command="Pause" CanExecute="Pause_Executed" Executed="Pause_Music" />
+        <CommandBinding Command="Open" CanExecute="Open_FileDialog_CanExecute" Executed="Open_FileDialog" />
+        <CommandBinding Command="New" CanExecute="Can_Edit" Executed="Can_Edit1" />
+    </Window.CommandBindings>
+    <Window.Background>
+        <ImageBrush ImageSource="./Res/BackGround.jpg" Stretch="Fill" />
+    </Window.Background>
+    <Grid Margin="-1,0,4,-1" HorizontalAlignment="Right" Width="365">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <!-- Grid Layout for Entire screen -->
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="231" />
+            <RowDefinition Height="16"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ToolBar Margin="0,0,240,190" Grid.Row="1" Grid.ColumnSpan="2">
+            <ToolBar.Background>
+                <ImageBrush ImageSource="./Res/ToolbarSkin.jpg" Stretch="Fill" />
+            </ToolBar.Background>
+            <Button Command="Open"
+                    Width="20"
+                    Height="20">
+                <Image Source="./Res/Folder.png" />
+            </Button>
+            <Button Command="Play"
+                    Width="20"
+                    Height="20">
+                <Image Source="./Res/Play.png" />
+
+            </Button>
+            <Button Command="Pause"
+                    Width="20"
+                    Height="20">
+                <Image Source="./Res/Pause.png" />
+            </Button>
+            <Button Command="Stop"
+                     Width="20"
+                    Height="20">
+                <Image Source="./Res/Stop.png" />
+            </Button>
+            <!-- Some how opening the FileDialog ??????-->
+            <Button Command="New"
+                     Width="20"
+                    Height="20" Margin="0,10,0,8">
+                <Image Source="./Res/Save.png" />
+            </Button>
+        </ToolBar>
+        <StatusBar Grid.Row="3" Grid.ColumnSpan="2">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                       <!--Status bar layout -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem>
+                <TextBlock Name="songTimer">00:00:00</TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch">
+                <Slider Name="songProgress" Thumb.DragStarted="Slider_Draged"  Thumb.DragCompleted="Slider_Draged_Stopped" ValueChanged="Slider_Val_CHanged" Margin="0,0,-6,0" />
+            </StatusBarItem>
+        </StatusBar>
+        <TextBlock Margin="21,48,271,153" Grid.Row="1" Grid.Column="1">
+            Now Playing
+        </TextBlock>
+        <TextBox IsReadOnly ="True" x:Name="Song" Margin="104,92,23,109" Grid.Row="1" Grid.Column="1"/>
+        <TextBlock Margin="60,92,271,109" Grid.Row="1" RenderTransformOrigin="0.479,0.636" Grid.Column="1">
+            Artist
+        </TextBlock>
+        <TextBox  IsReadOnly ="True" Name="Artist" Margin="104,48,23,153" Grid.Row="1" x:FieldModifier="public" Grid.Column="1"/>
+        <TextBlock Margin="53,137,271,64" Grid.Row="1" Grid.Column="1">
+            Album
+        </TextBlock>
+        <TextBox IsReadOnly ="True" x:Name="Album" Margin="104,137,23,64" Grid.Row="1" Grid.Column="1"/>
+        <TextBlock Margin="65,185,271,16" Grid.Row="1" RenderTransformOrigin="2.197,0.185" Grid.Column="1">
+            Year
+        </TextBlock>
+        <TextBox  IsReadOnly ="True" x:Name="Year" Margin="104,185,23,16" Grid.Row="1" Grid.Column="1"/>
+    </Grid>
+</Window>
